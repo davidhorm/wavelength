@@ -34,5 +34,6 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'spaced-comment': ['error', 'always', { 'markers': ['/'] }]
   },
 };
