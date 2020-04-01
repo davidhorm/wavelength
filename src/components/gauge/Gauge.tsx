@@ -19,6 +19,7 @@ const getPositionStyle = () => {
     position: relativePosition,
     width: `${imageSize.gaugeRange.width}px`,
     height: `${imageSize.gaugeRange.height}px`,
+    overflow: 'hidden',
   };
 
   const tickHeightDiff = imageSize.gaugeRange.height - imageSize.gaugeRange.tickHeight;
@@ -28,7 +29,10 @@ const getPositionStyle = () => {
     bottom: `${tickHeightDiff - imageSize.target.height / 2}px`,
   };
 
+  const centerOfCircle = imageSize.pointer.width - imageSize.pointer.radius;
+  const centerOfCirclePercent = (centerOfCircle / imageSize.pointer.width) * 100;
   const pointerPositionStyle = {
+    transformOrigin: `${centerOfCirclePercent}% 50%`,
     position: absolutePosition,
     right: `${imageSize.gaugeRange.width / 2 - imageSize.pointer.radius}px`,
     bottom: `${tickHeightDiff - imageSize.pointer.height / 2}px`,
@@ -77,7 +81,6 @@ const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointe
 
   const pointerAltText = 'TODO';
   const pointerStyle = {
-    transformOrigin: '94.4% 50%',
     transform: `rotate(${pointerDegree}deg)`,
     ...pointerPositionStyle,
   };
