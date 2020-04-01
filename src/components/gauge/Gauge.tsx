@@ -4,6 +4,11 @@ import gaugeRangeImage from './gauge-range.png';
 import pointerImage from './pointer.png';
 import targetImage from './target.png';
 
+/**
+ * Get the different styles so they're properly positioned when overlapped.
+ *
+ * @returns {object} style - CSS in JS object.
+ */
 const getPositionStyle = () => {
   const imageSize = {
     gaugeRange: { height: 356, width: 671, tickHeight: 339 },
@@ -24,6 +29,7 @@ const getPositionStyle = () => {
 
   const tickHeightDiff = imageSize.gaugeRange.height - imageSize.gaugeRange.tickHeight;
   const targetPositionStyle = {
+    transformOrigin: 'center right',
     position: absolutePosition,
     right: '50%',
     bottom: `${tickHeightDiff - imageSize.target.height / 2}px`,
@@ -46,22 +52,22 @@ const getPositionStyle = () => {
 };
 
 const GaugePropTypes = {
-  /** The degree in whole integer numbers to rotate the target with. */
+  /** The degree to rotate the target with. */
   targetDegree: PropTypes.number,
 
   /** Target visibility. */
   targetVisible: PropTypes.bool,
 
-  /** The degree in whole integer numbers to rotate the pointer with. */
+  /** The degree to rotate the pointer with. */
   pointerDegree: PropTypes.number,
 };
 
 type Props = PropTypes.InferProps<typeof GaugePropTypes>;
 
 /**
- * The Target component displays the scoring target. It can be rotated and hidden.
+ * The Gauge component displays the scoring target and pointer. Both can be rotated. The Target may be hidden.
  *
- * @returns {object} - Target Component
+ * @returns {object} - Gauge Component
  */
 const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointerDegree = 0 }) => {
   const { containerPositionStyle, targetPositionStyle, pointerPositionStyle } = getPositionStyle();
@@ -70,16 +76,15 @@ const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointe
     ...containerPositionStyle,
   };
 
-  const gaugeRangeAltText = 'TODO';
+  const gaugeRangeAltText = 'Semi-circle gauge ranging from 0 to 100.';
 
-  const targetAltText = 'TODO';
+  const targetAltText = 'Five colored slice representing 2, 3, and 4 points.';
   const targetStyle = {
-    transformOrigin: 'center right',
     transform: `rotate(${targetDegree}deg)`,
     ...targetPositionStyle,
   };
 
-  const pointerAltText = 'TODO';
+  const pointerAltText = 'Gauge pointer.';
   const pointerStyle = {
     transform: `rotate(${pointerDegree}deg)`,
     ...pointerPositionStyle,
