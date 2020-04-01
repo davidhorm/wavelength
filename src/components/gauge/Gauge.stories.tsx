@@ -15,3 +15,9 @@ export const knobs = () => (
     targetVisible={boolean('Target Visible', true)}
   />
 );
+
+export const defaultProps = () => <Gauge />;
+
+export const differentAngles = () => <Gauge targetDegree={45} pointerDegree={115} />;
+
+export const hiddenTarget = () => <Gauge targetVisible={false} />;
