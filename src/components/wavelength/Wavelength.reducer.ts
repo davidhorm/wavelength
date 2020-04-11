@@ -1,16 +1,10 @@
-interface WavelengthState {
-  targetPercent: number;
-  targetVisible: boolean;
-  pointerPercent: number;
-}
-
-export const initialState: WavelengthState = {
+export const initialState = {
   targetPercent: 0,
   targetVisible: false,
   pointerPercent: 50,
 };
 
-enum ACTION_TYPES {
+export enum ACTION_TYPES {
   INCREMENT_POINTER = 'INCREMENT_POINTER',
   DECREMENT_POINTER = 'DECREMENT_POINTER',
   SHOW_TARGET = 'SHOW_TARGET',
@@ -18,31 +12,15 @@ enum ACTION_TYPES {
   RESET_GAUGE = 'RESET_GAUGE',
 }
 
-interface TypeOnlyAction {
-  type:
-    | ACTION_TYPES.INCREMENT_POINTER
-    | ACTION_TYPES.DECREMENT_POINTER
-    | ACTION_TYPES.SHOW_TARGET
-    | ACTION_TYPES.HIDE_TARGET;
-}
+type actions =
+  | [ACTION_TYPES.INCREMENT_POINTER]
+  | [ACTION_TYPES.DECREMENT_POINTER]
+  | [ACTION_TYPES.SHOW_TARGET]
+  | [ACTION_TYPES.HIDE_TARGET]
+  | [ACTION_TYPES.RESET_GAUGE, number];
 
-interface SetTargetAction {
-  type: ACTION_TYPES.RESET_GAUGE;
-  value: number;
-}
-
-type WavelengthAction = TypeOnlyAction | SetTargetAction;
-
-export const actionCreator = {
-  incrementPointer: (): TypeOnlyAction => ({ type: ACTION_TYPES.INCREMENT_POINTER }),
-  decrementPointer: (): TypeOnlyAction => ({ type: ACTION_TYPES.DECREMENT_POINTER }),
-  showTarget: (): TypeOnlyAction => ({ type: ACTION_TYPES.SHOW_TARGET }),
-  hideTarget: (): TypeOnlyAction => ({ type: ACTION_TYPES.HIDE_TARGET }),
-  resetGauge: (): SetTargetAction => ({ type: ACTION_TYPES.RESET_GAUGE, value: Math.round(Math.random() * 100) }),
-};
-
-export const reducer = (state: WavelengthState, action: WavelengthAction): WavelengthState => {
-  switch (action.type) {
+export const reducer = (state: typeof initialState, [actionType, payload]: actions): typeof initialState => {
+  switch (actionType) {
     case ACTION_TYPES.INCREMENT_POINTER:
       return { ...state, pointerPercent: Math.min(100, state.pointerPercent + 1) };
     case ACTION_TYPES.DECREMENT_POINTER:
@@ -54,7 +32,7 @@ export const reducer = (state: WavelengthState, action: WavelengthAction): Wavel
     case ACTION_TYPES.RESET_GAUGE:
       return {
         ...initialState,
-        targetPercent: Math.min(100, Math.max(0, action.value)),
+        targetPercent: Math.min(100, Math.max(0, payload!)),
       };
     default:
       return state;
