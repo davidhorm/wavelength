@@ -4,7 +4,7 @@ interface WavelengthState {
   pointerPercent: number;
 }
 
-const initialState: WavelengthState = {
+export const initialState: WavelengthState = {
   targetPercent: 0,
   targetVisible: false,
   pointerPercent: 50,
