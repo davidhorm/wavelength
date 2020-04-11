@@ -15,13 +15,6 @@ describe('Wavelength reducer', () => {
     expect(expectedState).toEqual(actualState);
   });
 
-  it('should provide default state if no initial state passed in', () => {
-    const newState = reducer(undefined, { type: 'fake action' });
-    expect(newState.targetPercent).toBeDefined();
-    expect(newState.targetVisible).toBeDefined();
-    expect(newState.pointerPercent).toBeDefined();
-  });
-
   it(`shouldn't allow resetting the targetPercent state below 0`, () => {
     const initialState = {
       targetPercent: 88,

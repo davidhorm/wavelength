@@ -41,7 +41,7 @@ export const actionCreator = {
   resetGauge: (): SetTargetAction => ({ type: ACTION_TYPES.RESET_GAUGE, value: Math.round(Math.random() * 100) }),
 };
 
-export const reducer = (state: WavelengthState = initialState, action: WavelengthAction): WavelengthState => {
+export const reducer = (state: WavelengthState, action: WavelengthAction): WavelengthState => {
   switch (action.type) {
     case ACTION_TYPES.INCREMENT_POINTER:
       return { ...state, pointerPercent: Math.min(100, state.pointerPercent + 1) };
