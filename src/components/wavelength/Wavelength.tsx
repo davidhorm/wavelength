@@ -27,7 +27,10 @@ const Wavelength = () => {
       </div>
       <div>
         <Button onClick={() => dispatch(['RESET_GAUGE', Math.round(Math.random() * 100)])}>RESET</Button>
-        <Button onClick={() => dispatch(['SHOW_TARGET'])}>SHOW</Button>
+        <Button onMouseDown={() => dispatch(['PEAK_TARGET'])} onMouseUp={() => dispatch(['HIDE_TARGET'])}>
+          PEAK
+        </Button>
+        <Button onClick={() => dispatch(['SHOW_TARGET'])}>REVEAL</Button>
       </div>
     </div>
   );

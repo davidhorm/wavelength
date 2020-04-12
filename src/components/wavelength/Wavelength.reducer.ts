@@ -6,7 +6,7 @@ export const initialState = {
   pointerPercent: 50,
 };
 
-type actions = ['SET_POINTER', number] | ['SHOW_TARGET'] | ['HIDE_TARGET'] | ['RESET_GAUGE', number];
+type actions = ['SET_POINTER', number] | ['SHOW_TARGET'] | ['PEAK_TARGET'] | ['HIDE_TARGET'] | ['RESET_GAUGE', number];
 
 export const reducer = (state: typeof initialState, [actionType, payload]: actions): typeof initialState => {
   switch (actionType) {
@@ -17,6 +17,13 @@ export const reducer = (state: typeof initialState, [actionType, payload]: actio
       };
     case 'SHOW_TARGET':
       return { ...state, targetVisible: true };
+    case 'PEAK_TARGET': {
+      copy(state.targetPercent.toString());
+      return {
+        ...state,
+        targetVisible: true,
+      };
+    }
     case 'HIDE_TARGET':
       return { ...state, targetVisible: false };
     case 'RESET_GAUGE': {

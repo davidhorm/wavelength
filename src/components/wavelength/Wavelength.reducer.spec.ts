@@ -61,6 +61,22 @@ describe('Wavelength reducer', () => {
     });
   });
 
+  describe('PEAK_TARGET action', () => {
+    it('should set targetVisible to true', () => {
+      const initialState = {
+        targetPercent: 23,
+        targetVisible: false,
+        pointerPercent: 96,
+      };
+
+      const expectedState = { ...initialState, targetVisible: true };
+
+      const actualState = reducer(initialState, ['PEAK_TARGET']);
+
+      expect(expectedState).toEqual(actualState);
+    });
+  });
+
   describe('HIDE_TARGET action', () => {
     it('should set targetVisible to false', () => {
       const initialState = {
