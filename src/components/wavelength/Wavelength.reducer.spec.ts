@@ -1,20 +1,6 @@
-import { actionCreator, reducer } from './Wavelength.reducer';
+import { reducer } from './Wavelength.reducer';
 
 describe('Wavelength reducer', () => {
-  it(`shouldn't mutate state if no valid action given`, () => {
-    const initialState = {
-      targetPercent: 12,
-      targetVisible: true,
-      pointerPercent: 34,
-    };
-
-    const expectedState = { ...initialState };
-
-    const actualState = reducer(initialState, { type: 'fake action' });
-
-    expect(expectedState).toEqual(actualState);
-  });
-
   it(`shouldn't allow resetting the targetPercent state below 0`, () => {
     const initialState = {
       targetPercent: 88,
@@ -24,7 +10,7 @@ describe('Wavelength reducer', () => {
 
     const expectedState = { targetPercent: 0, targetVisible: false, pointerPercent: 50 };
 
-    const actualState = reducer(initialState, { type: 'RESET_GAUGE', value: -1 });
+    const actualState = reducer(initialState, ['RESET_GAUGE', -1]);
 
     expect(expectedState).toEqual(actualState);
   });
@@ -38,7 +24,7 @@ describe('Wavelength reducer', () => {
 
     const expectedState = { targetPercent: 100, targetVisible: false, pointerPercent: 50 };
 
-    const actualState = reducer(initialState, { type: 'RESET_GAUGE', value: 101 });
+    const actualState = reducer(initialState, ['RESET_GAUGE', 101]);
 
     expect(expectedState).toEqual(actualState);
   });
@@ -53,7 +39,7 @@ describe('Wavelength reducer', () => {
 
       const expectedState = { ...initialState, pointerPercent: 79 };
 
-      const actualState = reducer(initialState, actionCreator.incrementPointer());
+      const actualState = reducer(initialState, ['INCREMENT_POINTER']);
 
       expect(expectedState).toEqual(actualState);
     });
@@ -67,7 +53,7 @@ describe('Wavelength reducer', () => {
 
       const expectedState = { ...initialState };
 
-      const actualState = reducer(initialState, actionCreator.incrementPointer());
+      const actualState = reducer(initialState, ['INCREMENT_POINTER']);
 
       expect(expectedState).toEqual(actualState);
     });
@@ -83,7 +69,7 @@ describe('Wavelength reducer', () => {
 
       const expectedState = { ...initialState, pointerPercent: 62 };
 
-      const actualState = reducer(initialState, actionCreator.decrementPointer());
+      const actualState = reducer(initialState, ['DECREMENT_POINTER']);
 
       expect(expectedState).toEqual(actualState);
     });
@@ -97,7 +83,7 @@ describe('Wavelength reducer', () => {
 
       const expectedState = { ...initialState };
 
-      const actualState = reducer(initialState, actionCreator.decrementPointer());
+      const actualState = reducer(initialState, ['DECREMENT_POINTER']);
 
       expect(expectedState).toEqual(actualState);
     });
@@ -113,7 +99,7 @@ describe('Wavelength reducer', () => {
 
       const expectedState = { ...initialState, targetVisible: true };
 
-      const actualState = reducer(initialState, actionCreator.showTarget());
+      const actualState = reducer(initialState, ['SHOW_TARGET']);
 
       expect(expectedState).toEqual(actualState);
     });
@@ -129,7 +115,7 @@ describe('Wavelength reducer', () => {
 
       const expectedState = { ...initialState, targetVisible: false };
 
-      const actualState = reducer(initialState, actionCreator.hideTarget());
+      const actualState = reducer(initialState, ['HIDE_TARGET']);
 
       expect(expectedState).toEqual(actualState);
     });
@@ -143,14 +129,11 @@ describe('Wavelength reducer', () => {
         pointerPercent: 38,
       };
 
-      const randomSpy = jest.spyOn(Math, 'random');
-      const actualState = reducer(initialState, actionCreator.resetGauge());
+      const actualState = reducer(initialState, ['RESET_GAUGE', 42]);
 
       expect(actualState.pointerPercent).toBe(50);
       expect(actualState.targetVisible).toBe(false);
-      expect(actualState.targetPercent).toBeGreaterThanOrEqual(0);
-      expect(actualState.targetPercent).toBeLessThanOrEqual(100);
-      expect(randomSpy).toHaveBeenCalled();
+      expect(actualState.targetPercent).toBe(42);
     });
   });
 });
