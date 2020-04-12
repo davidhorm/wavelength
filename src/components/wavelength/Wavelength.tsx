@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button';
+import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import Gauge from '../gauge/Gauge';
@@ -18,8 +19,11 @@ const Wavelength = () => {
         pointerDegree={(state.pointerPercent * 180) / 100}
       />
       <div>
-        <Button onClick={() => dispatch(['DECREMENT_POINTER'])}>DECREASE</Button>
-        <Button onClick={() => dispatch(['INCREMENT_POINTER'])}>INCREASE</Button>
+        <Slider
+          valueLabelDisplay="on"
+          value={state.pointerPercent}
+          onChange={(event, value) => dispatch(['SET_POINTER', value as number])}
+        />
       </div>
       <div>
         <Button onClick={() => dispatch(['RESET_GAUGE', Math.round(Math.random() * 100)])}>RESET</Button>

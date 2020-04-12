@@ -1,61 +1,45 @@
 import { reducer } from './Wavelength.reducer';
 
 describe('Wavelength reducer', () => {
-  describe('INCREMENT_POINTER action', () => {
-    it('should increment pointer value by 1', () => {
+  describe('SET_POINTER action', () => {
+    it('should set to default initial state with specified target percent', () => {
       const initialState = {
         targetPercent: 56,
         targetVisible: false,
         pointerPercent: 78,
       };
 
-      const expectedState = { ...initialState, pointerPercent: 79 };
+      const expectedState = { ...initialState, pointerPercent: 43 };
 
-      const actualState = reducer(initialState, ['INCREMENT_POINTER']);
-
-      expect(expectedState).toEqual(actualState);
-    });
-
-    it(`shouldn't increment pointer value pass 100`, () => {
-      const initialState = {
-        targetPercent: 46,
-        targetVisible: false,
-        pointerPercent: 100,
-      };
-
-      const expectedState = { ...initialState };
-
-      const actualState = reducer(initialState, ['INCREMENT_POINTER']);
-
-      expect(expectedState).toEqual(actualState);
-    });
-  });
-
-  describe('DECREMENT_POINTER action', () => {
-    it('should decrement pointer value by 1', () => {
-      const initialState = {
-        targetPercent: 97,
-        targetVisible: true,
-        pointerPercent: 63,
-      };
-
-      const expectedState = { ...initialState, pointerPercent: 62 };
-
-      const actualState = reducer(initialState, ['DECREMENT_POINTER']);
+      const actualState = reducer(initialState, ['SET_POINTER', 43]);
 
       expect(expectedState).toEqual(actualState);
     });
 
-    it(`shouldn't decrement pointer value below 0`, () => {
+    it(`shouldn't allow setting the targetPercent state below 0`, () => {
       const initialState = {
         targetPercent: 63,
         targetVisible: false,
-        pointerPercent: 0,
+        pointerPercent: 59,
       };
 
-      const expectedState = { ...initialState };
+      const expectedState = { ...initialState, pointerPercent: 0 };
 
-      const actualState = reducer(initialState, ['DECREMENT_POINTER']);
+      const actualState = reducer(initialState, ['SET_POINTER', -1]);
+
+      expect(expectedState).toEqual(actualState);
+    });
+
+    it(`shouldn't allow setting the targetPercent state above 100`, () => {
+      const initialState = {
+        targetPercent: 100,
+        targetVisible: false,
+        pointerPercent: 46,
+      };
+
+      const expectedState = { ...initialState, pointerPercent: 100 };
+
+      const actualState = reducer(initialState, ['SET_POINTER', 101]);
 
       expect(expectedState).toEqual(actualState);
     });
