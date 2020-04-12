@@ -1,3 +1,5 @@
+import copy from 'copy-to-clipboard';
+
 export const initialState = {
   targetPercent: 0,
   targetVisible: false,
@@ -21,11 +23,14 @@ export const reducer = (state: typeof initialState, [actionType, payload]: actio
       return { ...state, targetVisible: true };
     case 'HIDE_TARGET':
       return { ...state, targetVisible: false };
-    case 'RESET_GAUGE':
+    case 'RESET_GAUGE': {
+      const targetValue = payload?.toString() || '';
+      copy(targetValue);
       return {
         ...initialState,
         targetPercent: Math.min(100, Math.max(0, payload!)),
       };
+    }
     default:
       return state;
   }
