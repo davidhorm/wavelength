@@ -18,13 +18,12 @@ const Wavelength = () => {
         pointerDegree={(state.pointerPercent * 180) / 100}
       />
       <div>
-        <Button onClick={() => dispatch(['DECREMENT_POINTER'])}>-</Button>
-        <Button onClick={() => dispatch(['INCREMENT_POINTER'])}>+</Button>
+        <Button onClick={() => dispatch(['DECREMENT_POINTER'])}>DECREASE</Button>
+        <Button onClick={() => dispatch(['INCREMENT_POINTER'])}>INCREASE</Button>
       </div>
       <div>
         <Button onClick={() => dispatch(['RESET_GAUGE', Math.round(Math.random() * 100)])}>RESET</Button>
         <Button onClick={() => dispatch(['SHOW_TARGET'])}>SHOW</Button>
-        <Button onClick={() => dispatch(['HIDE_TARGET'])}>HIDE</Button>
       </div>
     </div>
   );
