@@ -45,8 +45,8 @@ const Wavelength = () => {
         pointerDegree={(state.pointerPercent * 180) / 100}
       />
 
-      <Typography style={{ gridArea: GRID_AREA.ZERO_WORD }} variant="subtitle1">
-        cold
+      <Typography style={{ gridArea: GRID_AREA.ZERO_WORD }} variant="subtitle2">
+        {state.zeroWord}
       </Typography>
       <Slider
         style={{ gridArea: GRID_AREA.SLIDER, alignSelf: 'end' }}
@@ -54,8 +54,8 @@ const Wavelength = () => {
         value={state.pointerPercent}
         onChange={(event, value) => dispatch(['SET_POINTER', value as number])}
       />
-      <Typography style={{ gridArea: GRID_AREA.HUNDRED_WORD }} variant="subtitle1">
-        hot
+      <Typography style={{ gridArea: GRID_AREA.HUNDRED_WORD }} variant="subtitle2">
+        {state.hundredWord}
       </Typography>
 
       <ButtonGroup style={{ gridArea: GRID_AREA.BOTTOM, justifySelf: 'center' }}>
