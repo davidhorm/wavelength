@@ -60,7 +60,12 @@ const Wavelength = () => {
 
       <ButtonGroup style={{ gridArea: GRID_AREA.BOTTOM, justifySelf: 'center' }}>
         <Button onClick={() => dispatch(['RESET_GAUGE', Math.round(Math.random() * 100)])}>RESET</Button>
-        <Button onMouseDown={() => dispatch(['PEAK_TARGET'])} onMouseUp={() => dispatch(['HIDE_TARGET'])}>
+        <Button
+          onMouseDown={() => dispatch(['PEAK_TARGET'])}
+          onMouseUp={() => dispatch(['HIDE_TARGET'])}
+          onTouchStart={() => dispatch(['PEAK_TARGET'])}
+          onTouchEnd={() => dispatch(['HIDE_TARGET'])}
+        >
           PEAK
         </Button>
         <Button onClick={() => dispatch(['SHOW_TARGET'])}>REVEAL</Button>
