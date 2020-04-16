@@ -20,9 +20,14 @@ const getPositionStyle = () => {
   const relativePosition: 'relative' = 'relative';
   const absolutePosition: 'absolute' = 'absolute';
 
+  const gaugeRangeStyle = {
+    width: '100%',
+    maxWidth: `${imageSize.gaugeRange.width}px`,
+  };
+
   const containerPositionStyle = {
     position: relativePosition,
-    width: `${imageSize.gaugeRange.width}px`,
+    ...gaugeRangeStyle,
     height: `${imageSize.gaugeRange.height}px`,
     overflow: 'hidden',
   };
@@ -46,6 +51,7 @@ const getPositionStyle = () => {
 
   return {
     containerPositionStyle,
+    gaugeRangeStyle,
     targetPositionStyle,
     pointerPositionStyle,
   };
@@ -73,7 +79,7 @@ type Props = PropTypes.InferProps<typeof GaugePropTypes>;
  * @returns {object} - Gauge Component
  */
 const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointerDegree = 0, style }) => {
-  const { containerPositionStyle, targetPositionStyle, pointerPositionStyle } = getPositionStyle();
+  const { containerPositionStyle, gaugeRangeStyle, targetPositionStyle, pointerPositionStyle } = getPositionStyle();
 
   const containerStyle = {
     ...style,
@@ -96,7 +102,7 @@ const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointe
 
   return (
     <div style={containerStyle}>
-      <img src={gaugeRangeImage} alt={gaugeRangeAltText} />
+      <img src={gaugeRangeImage} alt={gaugeRangeAltText} style={gaugeRangeStyle} />
       {targetVisible && <img src={targetImage} alt={targetAltText} style={targetStyle} />}
       <img src={pointerImage} alt={pointerAltText} style={pointerStyle} />
     </div>
