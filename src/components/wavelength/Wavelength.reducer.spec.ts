@@ -1,45 +1,27 @@
-import { reducer } from './Wavelength.reducer';
+import { initialState, reducer } from './Wavelength.reducer';
 
 describe('Wavelength reducer', () => {
   describe('SET_POINTER action', () => {
     it('should set to default initial state with specified target percent', () => {
-      const initialState = {
-        targetPercent: 56,
-        targetVisible: false,
-        pointerPercent: 78,
-      };
-
       const expectedState = { ...initialState, pointerPercent: 43 };
 
-      const actualState = reducer(initialState, ['SET_POINTER', 43]);
+      const actualState = reducer(initialState, { type: 'SET_POINTER', pointerPercent: 43 });
 
       expect(expectedState).toEqual(actualState);
     });
 
     it(`shouldn't allow setting the targetPercent state below 0`, () => {
-      const initialState = {
-        targetPercent: 63,
-        targetVisible: false,
-        pointerPercent: 59,
-      };
-
       const expectedState = { ...initialState, pointerPercent: 0 };
 
-      const actualState = reducer(initialState, ['SET_POINTER', -1]);
+      const actualState = reducer(initialState, { type: 'SET_POINTER', pointerPercent: -1 });
 
       expect(expectedState).toEqual(actualState);
     });
 
     it(`shouldn't allow setting the targetPercent state above 100`, () => {
-      const initialState = {
-        targetPercent: 100,
-        targetVisible: false,
-        pointerPercent: 46,
-      };
-
       const expectedState = { ...initialState, pointerPercent: 100 };
 
-      const actualState = reducer(initialState, ['SET_POINTER', 101]);
+      const actualState = reducer(initialState, { type: 'SET_POINTER', pointerPercent: 101 });
 
       expect(expectedState).toEqual(actualState);
     });
@@ -47,15 +29,11 @@ describe('Wavelength reducer', () => {
 
   describe('SHOW_TARGET action', () => {
     it('should set targetVisible to true', () => {
-      const initialState = {
-        targetPercent: 31,
-        targetVisible: false,
-        pointerPercent: 16,
-      };
+      const state = { ...initialState, targetVisible: false };
 
-      const expectedState = { ...initialState, targetVisible: true };
+      const expectedState = { ...state, targetVisible: true };
 
-      const actualState = reducer(initialState, ['SHOW_TARGET']);
+      const actualState = reducer(state, { type: 'SHOW_TARGET' });
 
       expect(expectedState).toEqual(actualState);
     });
@@ -63,15 +41,11 @@ describe('Wavelength reducer', () => {
 
   describe('PEAK_TARGET action', () => {
     it('should set targetVisible to true', () => {
-      const initialState = {
-        targetPercent: 23,
-        targetVisible: false,
-        pointerPercent: 96,
-      };
+      const state = { ...initialState, targetVisible: false };
 
-      const expectedState = { ...initialState, targetVisible: true };
+      const expectedState = { ...state, targetVisible: true };
 
-      const actualState = reducer(initialState, ['PEAK_TARGET']);
+      const actualState = reducer(state, { type: 'PEAK_TARGET', isMouseEvent: false });
 
       expect(expectedState).toEqual(actualState);
     });
@@ -79,15 +53,11 @@ describe('Wavelength reducer', () => {
 
   describe('HIDE_TARGET action', () => {
     it('should set targetVisible to false', () => {
-      const initialState = {
-        targetPercent: 95,
-        targetVisible: true,
-        pointerPercent: 70,
-      };
+      const state = { ...initialState, targetVisible: true };
 
-      const expectedState = { ...initialState, targetVisible: false };
+      const expectedState = { ...state, targetVisible: false };
 
-      const actualState = reducer(initialState, ['HIDE_TARGET']);
+      const actualState = reducer(state, { type: 'HIDE_TARGET' });
 
       expect(expectedState).toEqual(actualState);
     });
@@ -95,13 +65,14 @@ describe('Wavelength reducer', () => {
 
   describe('RESET_GAUGE action', () => {
     it('should set to default initial state with specified target percent', () => {
-      const initialState = {
-        targetPercent: 21,
+      const state = {
+        ...initialState,
+        targetPercent: 88,
         targetVisible: true,
-        pointerPercent: 38,
+        pointerPercent: 47,
       };
 
-      const actualState = reducer(initialState, ['RESET_GAUGE', 42]);
+      const actualState = reducer(state, { type: 'RESET_GAUGE', targetPercent: 42 });
 
       expect(actualState.pointerPercent).toBe(50);
       expect(actualState.targetVisible).toBe(false);
@@ -109,31 +80,15 @@ describe('Wavelength reducer', () => {
     });
 
     it(`shouldn't allow setting the targetPercent state below 0`, () => {
-      const initialState = {
-        targetPercent: 88,
-        targetVisible: true,
-        pointerPercent: 47,
-      };
+      const actualState = reducer(initialState, { type: 'RESET_GAUGE', targetPercent: -1 });
 
-      const expectedState = { targetPercent: 0, targetVisible: false, pointerPercent: 50 };
-
-      const actualState = reducer(initialState, ['RESET_GAUGE', -1]);
-
-      expect(expectedState).toEqual(actualState);
+      expect(actualState.targetPercent).toBe(0);
     });
 
     it(`shouldn't allow setting the targetPercent state above 100`, () => {
-      const initialState = {
-        targetPercent: 93,
-        targetVisible: true,
-        pointerPercent: 91,
-      };
+      const actualState = reducer(initialState, { type: 'RESET_GAUGE', targetPercent: 101 });
 
-      const expectedState = { targetPercent: 100, targetVisible: false, pointerPercent: 50 };
-
-      const actualState = reducer(initialState, ['RESET_GAUGE', 101]);
-
-      expect(expectedState).toEqual(actualState);
+      expect(actualState.targetPercent).toBe(100);
     });
   });
 });

@@ -52,23 +52,25 @@ const Wavelength = () => {
         style={{ gridArea: GRID_AREA.SLIDER, alignSelf: 'end' }}
         valueLabelDisplay="on"
         value={state.pointerPercent}
-        onChange={(event, value) => dispatch(['SET_POINTER', value as number])}
+        onChange={(event, value) => dispatch({ type: 'SET_POINTER', pointerPercent: value as number })}
       />
       <Typography style={{ gridArea: GRID_AREA.HUNDRED_WORD }} variant="subtitle2">
         {state.hundredWord}
       </Typography>
 
       <ButtonGroup style={{ gridArea: GRID_AREA.BOTTOM, justifySelf: 'center' }}>
-        <Button onClick={() => dispatch(['RESET_GAUGE', Math.round(Math.random() * 100)])}>RESET</Button>
+        <Button onClick={() => dispatch({ type: 'RESET_GAUGE', targetPercent: Math.round(Math.random() * 100) })}>
+          RESET
+        </Button>
         <Button
-          onMouseDown={() => dispatch(['PEAK_TARGET'])}
-          onMouseUp={() => dispatch(['HIDE_TARGET'])}
-          onTouchStart={() => dispatch(['PEAK_TARGET'])}
-          onTouchEnd={() => dispatch(['HIDE_TARGET'])}
+          onMouseDown={() => dispatch({ type: 'PEAK_TARGET', isMouseEvent: true })}
+          onMouseUp={() => dispatch({ type: 'HIDE_TARGET' })}
+          onTouchStart={() => dispatch({ type: 'PEAK_TARGET', isMouseEvent: false })}
+          onTouchEnd={() => dispatch({ type: 'HIDE_TARGET' })}
         >
           PEAK
         </Button>
-        <Button onClick={() => dispatch(['SHOW_TARGET'])}>REVEAL</Button>
+        <Button onClick={() => dispatch({ type: 'SHOW_TARGET' })}>REVEAL</Button>
       </ButtonGroup>
     </div>
   );
