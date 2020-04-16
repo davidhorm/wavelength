@@ -10,21 +10,19 @@ enum GRID_AREA {
   TOP = 'top',
   GAUGE = 'gauge',
   SLIDER = 'slider',
-  ZERO_WORD = 'zero-word',
-  HUNDRED_WORD = 'hundred-word',
   BOTTOM = 'bottom',
 }
 
 const containerStyle = {
   display: 'grid',
-  gridTemplateColumns: 'auto 45px 554px 40px auto',
+  gridTemplateColumns: 'auto minmax(200px, 671px) auto',
   gridTemplateRows: 'auto auto 70px auto',
   gridGap: '1rem',
   gridTemplateAreas: `
-    '. .                      ${GRID_AREA.TOP}    .                         .'
-    '. ${GRID_AREA.GAUGE}     ${GRID_AREA.GAUGE}  ${GRID_AREA.GAUGE}        .'
-    '. ${GRID_AREA.ZERO_WORD} ${GRID_AREA.SLIDER} ${GRID_AREA.HUNDRED_WORD} .'
-    '. .                      ${GRID_AREA.BOTTOM} .                         .'
+    '. ${GRID_AREA.TOP}    .'
+    '. ${GRID_AREA.GAUGE}  .'
+    '. ${GRID_AREA.SLIDER} .'
+    '. ${GRID_AREA.BOTTOM} .'
   `,
 };
 
@@ -45,18 +43,16 @@ const Wavelength = () => {
         pointerDegree={(state.pointerPercent * 180) / 100}
       />
 
-      <Typography style={{ gridArea: GRID_AREA.ZERO_WORD }} variant="subtitle2">
-        {state.zeroWord}
-      </Typography>
-      <Slider
-        style={{ gridArea: GRID_AREA.SLIDER, alignSelf: 'end' }}
-        valueLabelDisplay="on"
-        value={state.pointerPercent}
-        onChange={(event, value) => dispatch({ type: 'SET_POINTER', pointerPercent: value as number })}
-      />
-      <Typography style={{ gridArea: GRID_AREA.HUNDRED_WORD }} variant="subtitle2">
-        {state.hundredWord}
-      </Typography>
+      <div style={{ gridArea: GRID_AREA.SLIDER, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <Typography variant="subtitle2">{state.zeroWord}</Typography>
+        <Slider
+          style={{ alignSelf: 'flex-end', width: '80%' }}
+          valueLabelDisplay="on"
+          value={state.pointerPercent}
+          onChange={(event, value) => dispatch({ type: 'SET_POINTER', pointerPercent: value as number })}
+        />
+        <Typography variant="subtitle2">{state.hundredWord}</Typography>
+      </div>
 
       <ButtonGroup style={{ gridArea: GRID_AREA.BOTTOM, justifySelf: 'center' }}>
         <Button onClick={() => dispatch({ type: 'RESET_GAUGE', targetPercent: Math.round(Math.random() * 100) })}>

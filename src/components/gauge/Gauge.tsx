@@ -28,7 +28,6 @@ const getPositionStyle = () => {
   const containerPositionStyle = {
     position: relativePosition,
     ...gaugeRangeStyle,
-    height: `${(imageSize.gaugeRange.height / imageSize.gaugeRange.width) * 100}%`,
     overflow: 'hidden',
   };
 
