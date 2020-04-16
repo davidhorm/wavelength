@@ -46,8 +46,9 @@ const getPositionStyle = () => {
   const pointerPositionStyle = {
     transformOrigin: `${centerOfCirclePercent}% 50%`,
     position: absolutePosition,
-    right: `${imageSize.gaugeRange.width / 2 - imageSize.pointer.radius}px`,
-    bottom: `${tickHeightDiff - imageSize.pointer.height / 2}px`,
+    right: `${((imageSize.gaugeRange.width / 2 - imageSize.pointer.radius) / imageSize.gaugeRange.width) * 100}%`,
+    bottom: `${((tickHeightDiff - imageSize.pointer.height / 2) / imageSize.gaugeRange.height) * 100}%`,
+    width: `${(imageSize.pointer.width / imageSize.gaugeRange.width) * 100}%`,
   };
 
   return {
