@@ -28,7 +28,7 @@ const getPositionStyle = () => {
   const containerPositionStyle = {
     position: relativePosition,
     ...gaugeRangeStyle,
-    height: `${imageSize.gaugeRange.height}px`,
+    height: `${(imageSize.gaugeRange.height / imageSize.gaugeRange.width) * 100}%`,
     overflow: 'hidden',
   };
 
@@ -36,8 +36,9 @@ const getPositionStyle = () => {
   const targetPositionStyle = {
     transformOrigin: 'center right',
     position: absolutePosition,
+    width: `${(imageSize.target.width / imageSize.gaugeRange.width) * 100}%`,
     right: '50%',
-    bottom: `${tickHeightDiff - imageSize.target.height / 2}px`,
+    bottom: `${((tickHeightDiff - imageSize.target.height / 2) / imageSize.gaugeRange.height) * 100}%`,
   };
 
   const centerOfCircle = imageSize.pointer.width - imageSize.pointer.radius;
