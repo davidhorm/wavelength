@@ -6,59 +6,64 @@ import React from 'react';
 import Gauge from '../gauge/Gauge';
 import { initialState, reducer } from './Wavelength.reducer';
 
+// #region Styles
+
+const columnFlexDirection: 'column' = 'column';
+const containerStyle = {
+  margin: '1rem',
+  display: 'flex',
+  flexDirection: columnFlexDirection,
+  alignItems: 'center',
+};
+
 enum GRID_AREA {
-  TOP = 'top',
-  GAUGE = 'gauge',
-  SLIDER = 'slider',
   ZERO_WORD = 'zero-word',
   HUNDRED_WORD = 'hundred-word',
-  BOTTOM = 'bottom',
+  SLIDER = 'slider',
 }
 
-const containerStyle = {
+const sliderStyle = {
+  width: '100%',
+  maxWidth: '671px',
   display: 'grid',
-  gridTemplateColumns: 'auto 45px 554px 40px auto',
-  gridTemplateRows: 'auto auto 70px auto',
-  gridGap: '1rem',
-  gridTemplateAreas: `
-    '. .                      ${GRID_AREA.TOP}    .                         .'
-    '. ${GRID_AREA.GAUGE}     ${GRID_AREA.GAUGE}  ${GRID_AREA.GAUGE}        .'
-    '. ${GRID_AREA.ZERO_WORD} ${GRID_AREA.SLIDER} ${GRID_AREA.HUNDRED_WORD} .'
-    '. .                      ${GRID_AREA.BOTTOM} .                         .'
+  columnGap: '1rem',
+  gridTemplate: `
+    '${GRID_AREA.ZERO_WORD} ${GRID_AREA.SLIDER} ${GRID_AREA.HUNDRED_WORD}' 5rem
+    / 7% auto 7%
   `,
 };
+
+// #endregion Styles
 
 const Wavelength = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   return (
-    <div style={containerStyle}>
-      <header style={{ gridArea: GRID_AREA.TOP }}>
-        <Typography variant="h1">Wavelength</Typography>
-        <Typography variant="h2">Actual: {state.targetVisible ? state.targetPercent : '???'}</Typography>
-      </header>
-
+    <main style={containerStyle}>
+      <Typography variant="h1">Wavelength</Typography>
+      <Typography variant="h2">Actual: {state.targetVisible ? state.targetPercent : '???'}</Typography>
       <Gauge
-        style={{ gridArea: GRID_AREA.GAUGE }}
         targetDegree={(state.targetPercent * 180) / 100}
         targetVisible={state.targetVisible}
         pointerDegree={(state.pointerPercent * 180) / 100}
       />
 
-      <Typography style={{ gridArea: GRID_AREA.ZERO_WORD }} variant="subtitle2">
-        {state.zeroWord}
-      </Typography>
-      <Slider
-        style={{ gridArea: GRID_AREA.SLIDER, alignSelf: 'end' }}
-        valueLabelDisplay="on"
-        value={state.pointerPercent}
-        onChange={(event, value) => dispatch({ type: 'SET_POINTER', pointerPercent: value as number })}
-      />
-      <Typography style={{ gridArea: GRID_AREA.HUNDRED_WORD }} variant="subtitle2">
-        {state.hundredWord}
-      </Typography>
+      <section style={sliderStyle}>
+        <Typography variant="subtitle2" style={{ gridArea: GRID_AREA.ZERO_WORD, justifySelf: 'left' }}>
+          {state.zeroWord}
+        </Typography>
+        <Slider
+          style={{ gridArea: GRID_AREA.SLIDER, alignSelf: 'end' }}
+          valueLabelDisplay="on"
+          value={state.pointerPercent}
+          onChange={(event, value) => dispatch({ type: 'SET_POINTER', pointerPercent: value as number })}
+        />
+        <Typography variant="subtitle2" style={{ gridArea: GRID_AREA.HUNDRED_WORD, justifySelf: 'right' }}>
+          {state.hundredWord}
+        </Typography>
+      </section>
 
-      <ButtonGroup style={{ gridArea: GRID_AREA.BOTTOM, justifySelf: 'center' }}>
+      <ButtonGroup>
         <Button onClick={() => dispatch({ type: 'RESET_GAUGE', targetPercent: Math.round(Math.random() * 100) })}>
           RESET
         </Button>
@@ -72,7 +77,7 @@ const Wavelength = () => {
         </Button>
         <Button onClick={() => dispatch({ type: 'SHOW_TARGET' })}>REVEAL</Button>
       </ButtonGroup>
-    </div>
+    </main>
   );
 };
 
