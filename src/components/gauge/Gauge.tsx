@@ -67,9 +67,6 @@ const GaugePropTypes = {
 
   /** The degree to rotate the pointer with. */
   pointerDegree: PropTypes.number,
-
-  /** Component inline style CSS-in-JS object. */
-  style: PropTypes.object,
 };
 
 type Props = PropTypes.InferProps<typeof GaugePropTypes>;
@@ -79,11 +76,10 @@ type Props = PropTypes.InferProps<typeof GaugePropTypes>;
  *
  * @returns {object} - Gauge Component
  */
-const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointerDegree = 0, style }) => {
+const Gauge: React.FC<Props> = ({ targetDegree = 0, targetVisible = true, pointerDegree = 0 }) => {
   const { containerPositionStyle, gaugeRangeStyle, targetPositionStyle, pointerPositionStyle } = getPositionStyle();
 
   const containerStyle = {
-    ...style,
     ...containerPositionStyle,
   };
 
