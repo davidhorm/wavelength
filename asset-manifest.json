@@ -1,21 +1,28 @@
 {
   "files": {
-    "main.js": "./main.9ff4d8226ef3dd4ec990.bundle.js",
-    "main.js.map": "./main.9ff4d8226ef3dd4ec990.bundle.js.map",
-    "runtime~main.js": "./runtime~main.9ff4d8226ef3dd4ec990.bundle.js",
-    "runtime~main.js.map": "./runtime~main.9ff4d8226ef3dd4ec990.bundle.js.map",
-    "vendors~main.js": "./vendors~main.9ff4d8226ef3dd4ec990.bundle.js",
-    "vendors~main.js.map": "./vendors~main.9ff4d8226ef3dd4ec990.bundle.js.map",
-    "iframe.html": "./iframe.html",
-    "precache-manifest.59a7103e4ec4bce1304b692d06e6d58c.js": "./precache-manifest.59a7103e4ec4bce1304b692d06e6d58c.js",
-    "service-worker.js": "./service-worker.js",
-    "static/media/gauge-range.png": "./static/media/gauge-range.0016a104.png",
-    "static/media/target.png": "./static/media/target.3b2ec5e6.png",
-    "vendors~main.9ff4d8226ef3dd4ec990.bundle.js.LICENSE.txt": "./vendors~main.9ff4d8226ef3dd4ec990.bundle.js.LICENSE.txt"
+    "main.css": "/wavelength/static/css/main.8ab6f918.chunk.css",
+    "main.js": "/wavelength/static/js/main.5eeee9b9.chunk.js",
+    "main.js.map": "/wavelength/static/js/main.5eeee9b9.chunk.js.map",
+    "runtime-main.js": "/wavelength/static/js/runtime-main.33bb8f0c.js",
+    "runtime-main.js.map": "/wavelength/static/js/runtime-main.33bb8f0c.js.map",
+    "static/css/2.be4fa334.chunk.css": "/wavelength/static/css/2.be4fa334.chunk.css",
+    "static/js/2.5e30d707.chunk.js": "/wavelength/static/js/2.5e30d707.chunk.js",
+    "static/js/2.5e30d707.chunk.js.map": "/wavelength/static/js/2.5e30d707.chunk.js.map",
+    "index.html": "/wavelength/index.html",
+    "precache-manifest.cd484e01d829db0796ce32b98fae5489.js": "/wavelength/precache-manifest.cd484e01d829db0796ce32b98fae5489.js",
+    "service-worker.js": "/wavelength/service-worker.js",
+    "static/css/2.be4fa334.chunk.css.map": "/wavelength/static/css/2.be4fa334.chunk.css.map",
+    "static/css/main.8ab6f918.chunk.css.map": "/wavelength/static/css/main.8ab6f918.chunk.css.map",
+    "static/js/2.5e30d707.chunk.js.LICENSE.txt": "/wavelength/static/js/2.5e30d707.chunk.js.LICENSE.txt",
+    "static/media/gauge-range.png": "/wavelength/static/media/gauge-range.0016a104.png",
+    "static/media/index.css": "/wavelength/static/media/roboto-latin-900italic.ebf6d164.woff2",
+    "static/media/target.png": "/wavelength/static/media/target.3b2ec5e6.png"
   },
   "entrypoints": [
-    "runtime~main.9ff4d8226ef3dd4ec990.bundle.js",
-    "vendors~main.9ff4d8226ef3dd4ec990.bundle.js",
-    "main.9ff4d8226ef3dd4ec990.bundle.js"
+    "static/js/runtime-main.33bb8f0c.js",
+    "static/css/2.be4fa334.chunk.css",
+    "static/js/2.5e30d707.chunk.js",
+    "static/css/main.8ab6f918.chunk.css",
+    "static/js/main.5eeee9b9.chunk.js"
   ]
 }
