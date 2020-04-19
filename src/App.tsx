@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import 'typeface-roboto';
-import './App.css';
+import HeaderNav from './components/HeaderNav';
 import Wavelength from './components/Wavelength';
 
 /**
@@ -8,9 +8,10 @@ import Wavelength from './components/Wavelength';
  */
 function App(): ReactElement {
   return (
-    <div className="App">
+    <>
+      <HeaderNav />
       <Wavelength />
-    </div>
+    </>
   );
 }
 

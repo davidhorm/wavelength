@@ -40,7 +40,6 @@ const Wavelength = () => {
 
   return (
     <main style={containerStyle}>
-      <Typography variant="h1">Wavelength</Typography>
       <Typography variant="h2">Actual: {state.targetVisible ? state.targetPercent : '???'}</Typography>
       <Gauge
         targetDegree={(state.targetPercent * 180) / 100}
