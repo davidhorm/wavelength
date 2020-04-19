@@ -119,6 +119,7 @@ module.exports = {
     'react/require-default-props': 0, // defaultProps will be deprecated. https://twitter.com/dan_abramov/status/1133878326358171650?s=20
     '@typescript-eslint/no-unused-expressions': 0, // disabling because can't do `this && that()`
   },
+  ignorePatterns: ['build/'],
   settings: {
     jsdoc: {
       mode: 'typescript' // Allows @template. https://github.com/gajus/eslint-plugin-jsdoc#mode
