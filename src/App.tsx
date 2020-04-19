@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import 'typeface-roboto';
 import './App.css';
-import Wavelength from './components/wavelength/Wavelength';
+import Wavelength from './components/Wavelength';
 
 /**
  * @returns {ReactElement} - Main App JSX

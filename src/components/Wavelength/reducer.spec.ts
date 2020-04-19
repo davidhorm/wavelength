@@ -1,4 +1,4 @@
-import { initialState, reducer } from './Wavelength.reducer';
+import { initialState, reducer } from './reducer';
 
 describe('Wavelength reducer', () => {
   describe('SET_POINTER action', () => {

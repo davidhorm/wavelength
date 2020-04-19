@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import gaugeRangeImage from './gauge-range.png';
-import pointerImage from './pointer.png';
-import targetImage from './target.png';
+import gaugeRangeImage from './resources/gauge-range.png';
+import pointerImage from './resources/pointer.png';
+import targetImage from './resources/target.png';
 
 /**
  * Get the different styles so they're properly positioned when overlapped.

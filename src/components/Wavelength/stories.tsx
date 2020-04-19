@@ -1,5 +1,5 @@
 import React from 'react';
-import Wavelength from './Wavelength';
+import Wavelength from '.';
 
 export default {
   title: 'Wavelength',

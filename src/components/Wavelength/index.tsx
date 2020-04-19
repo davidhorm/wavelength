@@ -3,8 +3,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import Gauge from '../gauge/Gauge';
-import { initialState, reducer } from './Wavelength.reducer';
+import Gauge from '../Gauge';
+import { initialState, reducer } from './reducer';
 
 // #region Styles
 

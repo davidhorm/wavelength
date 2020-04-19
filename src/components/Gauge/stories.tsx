@@ -1,6 +1,6 @@
 import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
-import Gauge from './Gauge';
+import Gauge from '.';
 
 export default {
   title: 'Gauge',

@@ -1,5 +1,5 @@
 import copy from 'copy-to-clipboard';
-import antonyms from './antonyms';
+import antonyms from './resources/antonyms';
 
 export const initialState = {
   targetPercent: 0,
