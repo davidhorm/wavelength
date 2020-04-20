@@ -1,5 +1,4 @@
 import AppBar from '@material-ui/core/AppBar';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,19 +15,44 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import SpeedIcon from '@material-ui/icons/Speed';
 import React from 'react';
 
-const navListItems = [
-  { icon: <SpeedIcon />, text: 'Wavelength', href: '/wavelength' },
-  { icon: <InfoIcon />, text: 'About', href: '/wavelength/docs' },
-  { icon: <MenuBookIcon />, text: 'Tech Spec', href: '/wavelength/docs' },
-  { icon: <GitHubIcon />, text: 'GitHub', href: 'https://github.com/davidhorm/wavelength' },
-];
-
 const HeaderNav = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const navListItems = [
+    { icon: <ChevronRightIcon />, text: '', onClick: () => toggleDrawer() },
+    {
+      icon: <SpeedIcon />,
+      text: 'Wavelength',
+      onClick: () => {
+        window.location.href = '/wavelength';
+      },
+    },
+    {
+      icon: <InfoIcon />,
+      text: 'About',
+      onClick: () => {
+        window.location.href = '/wavelength/docs';
+      },
+    },
+    {
+      icon: <MenuBookIcon />,
+      text: 'Tech Spec',
+      onClick: () => {
+        window.location.href = '/wavelength/docs';
+      },
+    },
+    {
+      icon: <GitHubIcon />,
+      text: 'GitHub',
+      onClick: () => {
+        window.location.href = 'https://github.com/davidhorm/wavelength';
+      },
+    },
+  ];
 
   return (
     <>
@@ -44,19 +68,9 @@ const HeaderNav = () => {
       </header>
       <nav>
         <SwipeableDrawer anchor="right" open={drawerOpen} onOpen={() => toggleDrawer()} onClose={() => toggleDrawer()}>
-          <IconButton onClick={() => toggleDrawer()}>
-            <ChevronRightIcon />
-          </IconButton>
-          <Divider />
           <List>
-            {navListItems.map(({ icon, text, href }) => (
-              <ListItem
-                button
-                key={text}
-                onClick={() => {
-                  window.location.href = href;
-                }}
-              >
+            {navListItems.map(({ icon, text, onClick }) => (
+              <ListItem button key={text} onClick={onClick}>
                 <ListItemIcon>{icon}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
